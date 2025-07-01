@@ -3,10 +3,12 @@ import fetch from 'node-fetch';
 export default async function handler(req, res) {
   try {
     const apiKey = process.env.API_KEY_511;
-    const response = await fetch(`https://api.511.org/transit/TripUpdates?agency=RG&api_key=${apiKey}`);
-    const data = await response.text();
+    const apiRes = await fetch(
+      `https://api.511.org/transit/TripUpdates?agency=RG&api_key=${apiKey}`
+    );
+    const data = await apiRes.text();
 
-    // CORS headers
+    // Essential CORS headers
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
